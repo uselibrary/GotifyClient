@@ -32,12 +32,10 @@ namespace GotifyClient
             try
             {
                 var assembly = System.Reflection.Assembly.GetExecutingAssembly();
-                using (var stream = assembly.GetManifestResourceStream("GotifyClient.gotify.ico"))
+                using var stream = assembly.GetManifestResourceStream("GotifyClient.gotify.ico");
+                if (stream != null)
                 {
-                    if (stream != null)
-                    {
-                        Icon = new Icon(stream);
-                    }
+                    Icon = new Icon(stream);
                 }
             }
             catch
@@ -50,14 +48,14 @@ namespace GotifyClient
             _notificationService = new NotificationService(_notifyIcon, _configService.Config);
             
             // 窗口加载完成后再加载历史消息
-            this.Load += (s, e) => _ = Task.Run(LoadHistoryMessages);
+            Load += (s, e) => _ = Task.Run(LoadHistoryMessages);
             
             // 根据配置决定是否在启动时显示主界面
             if (!_configService.Config.ShowMainFormOnStartup)
             {
-                this.WindowState = FormWindowState.Minimized;
-                this.ShowInTaskbar = false;
-                this.Visible = false;
+                WindowState = FormWindowState.Minimized;
+                ShowInTaskbar = false;
+                Visible = false;
             }
             
             // 如果配置完整，自动连接

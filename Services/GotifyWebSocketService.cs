@@ -5,24 +5,18 @@ using GotifyClient.Models;
 
 namespace GotifyClient.Services
 {
-    public class GotifyWebSocketService : IDisposable
+    public class GotifyWebSocketService(string serverUrl, string clientToken) : IDisposable
     {
         private ClientWebSocket? _webSocket;
         private CancellationTokenSource? _cancellationTokenSource;
-        private readonly string _serverUrl;
-        private readonly string _clientToken;
+        private readonly string _serverUrl = serverUrl.TrimEnd('/');
+        private readonly string _clientToken = clientToken;
         private bool _isConnected;
 
         public event Action<GotifyMessage>? MessageReceived;
         public event Action<string>? ConnectionStatusChanged;
 
         public bool IsConnected => _isConnected;
-
-        public GotifyWebSocketService(string serverUrl, string clientToken)
-        {
-            _serverUrl = serverUrl.TrimEnd('/');
-            _clientToken = clientToken;
-        }
 
         public async Task ConnectAsync()
         {
@@ -149,6 +143,7 @@ namespace GotifyClient.Services
             _cancellationTokenSource?.Cancel();
             _webSocket?.Dispose();
             _cancellationTokenSource?.Dispose();
+            GC.SuppressFinalize(this);
         }
     }
 }

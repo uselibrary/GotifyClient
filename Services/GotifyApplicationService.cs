@@ -3,19 +3,12 @@ using GotifyClient.Models;
 
 namespace GotifyClient.Services
 {
-    public class GotifyApplicationService
+    public class GotifyApplicationService(string serverUrl, string clientToken)
     {
-        private readonly string _serverUrl;
-        private readonly string _clientToken;
+        private readonly string _serverUrl = serverUrl.TrimEnd('/');
+        private readonly string _clientToken = clientToken;
         private readonly Dictionary<int, string> _appNameCache = new();
-        private readonly HttpClient _httpClient;
-
-        public GotifyApplicationService(string serverUrl, string clientToken)
-        {
-            _serverUrl = serverUrl.TrimEnd('/');
-            _clientToken = clientToken;
-            _httpClient = new HttpClient();
-        }
+        private readonly HttpClient _httpClient = new HttpClient();
 
         public async Task<string> GetApplicationNameAsync(int appId)
         {

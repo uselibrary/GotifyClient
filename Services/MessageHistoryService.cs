@@ -28,7 +28,7 @@ namespace GotifyClient.Services
         {
             lock (_lock)
             {
-                return new List<GotifyMessage>(_messages);
+                return [.. _messages];
             }
         }
 
@@ -75,7 +75,7 @@ namespace GotifyClient.Services
                 System.Diagnostics.Debug.WriteLine($"加载消息历史失败: {ex.Message}");
             }
 
-            return new List<GotifyMessage>();
+            return [];
         }
 
         private void SaveMessages()

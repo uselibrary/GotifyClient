@@ -58,17 +58,14 @@ namespace GotifyClient.Services
             if (Application.OpenForms.Count > 0)
             {
                 var mainForm = Application.OpenForms[0];
-                if (mainForm != null)
+                mainForm?.Invoke(new Action(() =>
                 {
-                    mainForm.Invoke(new Action(() =>
-                    {
-                        var notificationForm = new GotifyClient.Forms.NotificationForm(
-                            message, 
-                            _config.NotificationAutoHide, 
-                            _config.NotificationDuration);
-                        notificationForm.Show();
-                    }));
-                }
+                    var notificationForm = new Forms.NotificationForm(
+                        message,
+                        _config.NotificationAutoHide,
+                        _config.NotificationDuration);
+                    notificationForm.Show();
+                }));
             }
         }
 

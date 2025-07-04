@@ -129,7 +129,7 @@ namespace GotifyClient.Controls
             {
                 BackColor = Color.FromArgb(248, 249, 250);
                 // 增强优先级条的视觉效果
-                _priorityBar.BackColor = Color.FromArgb(255, GetPriorityColor(_message.Priority).R, 
+                _priorityBar.BackColor = Color.FromArgb(255, GetPriorityColor(_message.Priority).R,
                     GetPriorityColor(_message.Priority).G, GetPriorityColor(_message.Priority).B);
             };
             MouseLeave += (s, e) => 
@@ -145,7 +145,7 @@ namespace GotifyClient.Controls
                 control.MouseEnter += (s, e) => 
                 {
                     BackColor = Color.FromArgb(248, 249, 250);
-                    _priorityBar.BackColor = Color.FromArgb(255, GetPriorityColor(_message.Priority).R, 
+                    _priorityBar.BackColor = Color.FromArgb(255, GetPriorityColor(_message.Priority).R,
                         GetPriorityColor(_message.Priority).G, GetPriorityColor(_message.Priority).B);
                 };
                 control.MouseLeave += (s, e) => 
@@ -229,24 +229,7 @@ namespace GotifyClient.Controls
             _priorityLabel.BackColor = GetPriorityColor(_message.Priority);
         }
 
-        private string GetPriorityText(int priority)
-        {
-            return priority switch
-            {
-                0 => "最低",
-                1 => "低",
-                2 => "普通",
-                3 => "中等",
-                4 => "重要",
-                5 => "高",
-                6 => "紧急",
-                7 => "严重",
-                >= 8 => "危急",
-                _ => "普通"
-            };
-        }
-
-        private Color GetPriorityColor(int priority)
+        private static Color GetPriorityColor(int priority)
         {
             return priority switch
             {
@@ -263,7 +246,7 @@ namespace GotifyClient.Controls
             };
         }
 
-        private string GetAppIcon(int priority)
+        private static string GetAppIcon(int priority)
         {
             return priority.ToString(); // 显示优先度数字
         }
