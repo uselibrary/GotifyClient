@@ -1,0 +1,43 @@
+# Visual Studio
+.vs/
+
+# Build results
+[Bb]in/
+[Oo]bj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Publish results
+publish/
+
+# Auto-generated files
+*.cache
+*.log
+*.pdb
+*.dbmdl
+*.dbmdl
+*.bak
+*.Backup
+*.tmp
+*.temp
+*.ide
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Rider
+.idea/
+*.sln.iml
+
+# Others
+*.swp
+*.swn
+*.swo
+
+# rustory
+.rustory
