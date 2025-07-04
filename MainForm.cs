@@ -290,6 +290,7 @@ namespace GotifyClient
             catch
             {
                 // 如果加载图标失败，使用默认图标
+                _notifyIcon.Icon = SystemIcons.Application;
             }
             
             _notifyIcon.MouseClick += NotifyIcon_MouseClick;

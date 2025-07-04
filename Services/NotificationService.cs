@@ -18,8 +18,8 @@ namespace GotifyClient.Services
             _notifyIcon = notifyIcon;
             _config = config;
             
-            // 创建图标（这里使用系统图标作为示例，实际应用中应使用自定义图标）
-            _normalIcon = SystemIcons.Application;
+            // 直接使用托盘图标的当前图标作为正常状态
+            _normalIcon = _notifyIcon.Icon ?? SystemIcons.Application;
             _alertIcon = SystemIcons.Exclamation;
             
             _blinkTimer = new System.Windows.Forms.Timer();
