@@ -37,24 +37,36 @@
 
 ## 使用方法
 
+
 1. 运行程序
-2. 点击"设置"按钮配置 Gotify 服务器地址和客户端令牌
+2. 点击“设置”按钮，填写 Gotify 服务器地址和客户端令牌，保存后返回主界面
+3. 可点击“测试连接”验证配置是否正确
+4. 保存设置后自动连接到服务器，主界面将显示历史消息和实时推送
+5. 可通过“清空消息”按钮一键清除所有历史消息
+
 # 截图预览
 
-<img src="assets/main.png" width="50%" />
-<div align="center"><sup>主界面示例</sup></div>
-
-<img src="assets/tray.png" width="50%" />
-<div align="center"><sup>系统托盘图标示例</sup></div>
+自定义弹窗通知示例，右上角显示。
 
 <img src="assets/notice.png" width="50%" />
-<div align="center"><sup>自定义弹窗通知示例</sup></div>
+
+主界面示例
+
+<img src="assets/main.png" width="50%" />
+
+系统托盘图标示例
+
+<img src="assets/tray.png" width="50%" />
+
+自定义弹窗通知示例
+
+<img src="assets/notice.png" width="50%" />
+
+设置窗口示例
 
 <img src="assets/setting.png" width="50%" />
-<div align="center"><sup>设置窗口示例</sup></div>
-3. 点击"测试连接"验证配置是否正确
-4. 保存设置后自动连接到服务器
-5. 程序将在系统托盘运行，接收并显示推送消息
+
+
 
 ## 配置选项
 
@@ -65,6 +77,8 @@
 - **通知自动消失**：通知窗口是否自动消失，关闭后需手动点击关闭
 - **最小化到系统托盘**：是否支持托盘最小化
 - **通知持续时间**：通知窗口显示时长（毫秒）仅在自动消失启用时有效
+- **启动时显示主窗口**：是否在程序启动时自动显示主界面
+- **储存位置**：配置文件存储在 `%APPDATA%\GotifyClient\config.json`
 
 ## 消息历史记录功能
 
@@ -138,7 +152,7 @@
 ## 依赖项
 
 - .NET 8.0
-- Windows Forms
+- Windows Forms（System.Windows.Forms）
 - Newtonsoft.Json
 - System.Net.WebSockets.Client
 
@@ -153,8 +167,6 @@ dotnet build
 
 # 运行项目
 dotnet run
-
-# 或者直接双击 start.bat 启动
 ```
 
 ## 系统要求
@@ -162,11 +174,12 @@ dotnet run
 - Windows 10 或更高版本
 - .NET 8.0 运行时
 
+
+
 ## 注意事项
 
-- 首次运行需要配置服务器地址和客户端令牌
+- 首次运行需要点击“设置”并填写服务器地址和客户端令牌，否则无法连接 Gotify 服务器
 - 配置文件存储在 `%APPDATA%\GotifyClient\config.json`
-- 程序支持单实例运行，避免重复启动
 
 ### 代码修复记录 (2025-07-04)
 - **修复 MainForm.cs 语法错误**: 解决了多处字符串编码问题和缺失引号导致的27个编译错误
