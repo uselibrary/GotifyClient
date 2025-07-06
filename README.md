@@ -58,10 +58,6 @@
 
 <img src="assets/tray.png" width="50%" />
 
-自定义弹窗通知示例
-
-<img src="assets/notice.png" width="50%" />
-
 设置窗口示例
 
 <img src="assets/setting.png" width="50%" />
