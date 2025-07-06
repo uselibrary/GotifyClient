@@ -1,6 +1,9 @@
 # Gotify Windows 托盘客户端
 
+
 一个基于 .NET 8 和 Windows Forms 的 Gotify 客户端，提供系统托盘集成、实时消息接收和通知展示功能。
+
+
 
 ## 功能特性
 
@@ -36,6 +39,19 @@
 
 1. 运行程序
 2. 点击"设置"按钮配置 Gotify 服务器地址和客户端令牌
+# 截图预览
+
+<img src="assets/main.png" width="50%" />
+<div align="center"><sup>主界面示例</sup></div>
+
+<img src="assets/tray.png" width="50%" />
+<div align="center"><sup>系统托盘图标示例</sup></div>
+
+<img src="assets/notice.png" width="50%" />
+<div align="center"><sup>自定义弹窗通知示例</sup></div>
+
+<img src="assets/setting.png" width="50%" />
+<div align="center"><sup>设置窗口示例</sup></div>
 3. 点击"测试连接"验证配置是否正确
 4. 保存设置后自动连接到服务器
 5. 程序将在系统托盘运行，接收并显示推送消息
