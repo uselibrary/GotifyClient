@@ -35,7 +35,7 @@ namespace GotifyClient.Forms
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen; // 将窗体启动位置设置为屏幕中央
             ShowInTaskbar = false;
 
             // 创建控件
@@ -151,6 +151,19 @@ namespace GotifyClient.Forms
                 ForeColor = Color.Blue
             };
 
+            var reconnectCheckBox = new CheckBox
+            {
+                Text = "启用主动重连",
+                Location = new Point(15, 55), // 调整位置到 "显示自定义弹窗通知" 下方
+                Size = new Size(200, 23),
+                Checked = _configService.Config.EnableReconnect // 从配置加载默认值
+            };
+            reconnectCheckBox.CheckedChanged += (sender, args) =>
+            {
+                _configService.Config.EnableReconnect = reconnectCheckBox.Checked;
+                _configService.SaveConfig();
+            };
+
             notificationGroupBox.Controls.Add(_showCustomNotificationCheckBox);
             notificationGroupBox.Controls.Add(_playSoundCheckBox);
             notificationGroupBox.Controls.Add(_notificationAutoHideCheckBox);
@@ -159,6 +172,7 @@ namespace GotifyClient.Forms
             notificationGroupBox.Controls.Add(_notificationDurationNumeric);
             notificationGroupBox.Controls.Add(durationHelpLabel);
             notificationGroupBox.Controls.Add(noteLabel);
+            notificationGroupBox.Controls.Add(reconnectCheckBox);
 
             // 其他设置组
             var otherGroupBox = new GroupBox
@@ -221,6 +235,15 @@ namespace GotifyClient.Forms
             buttonPanel.Controls.Add(saveButton);
             buttonPanel.Controls.Add(cancelButton);
 
+            // 版本信息标签
+            var versionLabel = new Label
+            {
+                Text = "版本: v0.1.2",
+                Location = new Point(20, 500),
+                Size = new Size(200, 23),
+                ForeColor = Color.Gray
+            };
+
             // 添加控件到窗体
             Controls.Add(serverLabel);
             Controls.Add(_serverUrlTextBox);
@@ -230,6 +253,7 @@ namespace GotifyClient.Forms
             Controls.Add(notificationGroupBox);
             Controls.Add(otherGroupBox);
             Controls.Add(buttonPanel);
+            Controls.Add(versionLabel);
 
             ResumeLayout(false);
         }

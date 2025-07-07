@@ -50,5 +50,6 @@ namespace GotifyClient.Models
         public bool NotificationNeverClose { get; set; } = false; // 永不自动关闭
         public bool MinimizeToTray { get; set; } = true;
         public bool ShowMainFormOnStartup { get; set; } = true; // 启动时显示主界面
+        public bool EnableReconnect { get; set; } = true; // 启用主动重连
     }
 }

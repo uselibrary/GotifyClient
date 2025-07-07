@@ -13,10 +13,19 @@ namespace GotifyClient.Services
         private readonly string _clientToken = clientToken;
         private bool _isConnected;
 
+        private bool _enableReconnect = true; // 默认启用重连
+        private int _reconnectInterval = 5000; // 重连间隔（毫秒）
+
         public event Action<GotifyMessage>? MessageReceived;
         public event Action<string>? ConnectionStatusChanged;
 
         public bool IsConnected => _isConnected;
+
+        public bool EnableReconnect
+        {
+            get => _enableReconnect;
+            set => _enableReconnect = value;
+        }
 
         public async Task ConnectAsync()
         {
@@ -50,6 +59,34 @@ namespace GotifyClient.Services
                 _isConnected = false;
                 ConnectionStatusChanged?.Invoke($"连接失败: {ex.Message}");
                 throw;
+            }
+        }
+
+        private async Task ReconnectAsync()
+        {
+            int retryCount = 0;
+            int maxRetryCount = 10; // 最大重连次数
+            while (_enableReconnect && !_isConnected)
+            {
+                try
+                {
+                    if (retryCount >= maxRetryCount)
+                    {
+                        ConnectionStatusChanged?.Invoke("重连失败: 达到最大重连次数");
+                        break;
+                    }
+
+                    await Task.Delay(_reconnectInterval);
+                    await ConnectAsync();
+                }
+                catch (Exception ex)
+                {
+                    retryCount++;
+                    System.Diagnostics.Debug.WriteLine($"重连尝试失败 (第{retryCount}次): {ex.Message}");
+                    
+                    // 动态增加重连间隔（例如每次失败后增加1秒，最大30秒）
+                    _reconnectInterval = Math.Min(_reconnectInterval + 1000, 30000);
+                }
             }
         }
 
@@ -112,6 +149,11 @@ namespace GotifyClient.Services
                 if (_webSocket?.State != WebSocketState.Closed)
                 {
                     ConnectionStatusChanged?.Invoke("连接已断开");
+                }
+
+                if (_enableReconnect)
+                {
+                    await ReconnectAsync();
                 }
             }
         }
