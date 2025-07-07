@@ -157,6 +157,9 @@ namespace GotifyClient.Controls
 
             // 添加边框绘制
             Paint += MessageItem_Paint;
+            
+            // 添加右键菜单
+            InitializeContextMenu();
         }
 
         private void MessageItem_Paint(object? sender, PaintEventArgs e)
@@ -249,6 +252,41 @@ namespace GotifyClient.Controls
         private static string GetAppIcon(int priority)
         {
             return priority.ToString(); // 显示优先度数字
+        }
+
+        private void InitializeContextMenu()
+        {
+            var contextMenu = new ContextMenuStrip();
+            
+            var copyItem = new ToolStripMenuItem("复制");
+            copyItem.Click += CopyMenuItem_Click;
+            
+            contextMenu.Items.Add(copyItem);
+            
+            // 为主面板和所有子控件设置右键菜单
+            ContextMenuStrip = contextMenu;
+            
+            // 为所有子控件也添加右键菜单
+            foreach (Control control in Controls)
+            {
+                control.ContextMenuStrip = contextMenu;
+            }
+        }
+        
+        private void CopyMenuItem_Click(object? sender, EventArgs e)
+        {
+            try
+            {
+                // 只复制消息内容
+                var copyText = _message.Message ?? "";
+                
+                // 复制到剪贴板
+                Clipboard.SetText(copyText);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"复制失败: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
