@@ -132,6 +132,23 @@ namespace GotifyClient.Forms
                 TextAlign = ContentAlignment.TopLeft
             };
 
+            // 添加“复制”按钮
+            var copyButton = new Button
+            {
+                Text = "复制",
+                Size = new Size(50, 25),
+                Location = new Point(350, 75),
+                Font = new Font("微软雅黑", 9),
+                FlatStyle = FlatStyle.Flat,
+                FlatAppearance = { BorderSize = 0 },
+                BackColor = Color.FromArgb(70, 130, 180),
+                ForeColor = Color.White
+            };
+            copyButton.Click += (s, e) => Clipboard.SetText(_message.Message ?? "");
+
+            contentPanel.Controls.Add(messageLabel);
+            contentPanel.Controls.Add(copyButton);
+
             // 底部状态栏
             var statusPanel = new Panel
             {
@@ -186,8 +203,6 @@ namespace GotifyClient.Forms
             statusPanel.Controls.Add(priorityLabel);
             statusPanel.Controls.Add(autoHideLabel);
             statusPanel.Controls.Add(pinButton);
-
-            contentPanel.Controls.Add(messageLabel);
 
             // 添加控件到窗体
             Controls.Add(titlePanel);
