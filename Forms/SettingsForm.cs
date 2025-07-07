@@ -238,7 +238,7 @@ namespace GotifyClient.Forms
             // 版本信息标签
             var versionLabel = new Label
             {
-                Text = "版本: v0.1.2",
+                Text = "版本: 0.1.2",
                 Location = new Point(20, 500),
                 Size = new Size(200, 23),
                 ForeColor = Color.Gray
