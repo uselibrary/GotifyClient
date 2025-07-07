@@ -204,3 +204,4 @@ dotnet publish -c Release -r win-x64 --self-contained false -p:PublishReadyToRun
 
 - [x] 断网重连
 - [ ] 验证码提取
+- [ ] SQLite 数据库(待定)
